@@ -12,10 +12,6 @@
         $rootScope.chosenAddMethod = null;
         $rootScope.chosenSpace = null;
 
-
-
-
-        vm.items = ['item1', 'item2', 'item3'];
         vm.animationsEnabled = true;
         vm.selected = null;
 
@@ -598,12 +594,7 @@
                     templateUrl: 'confluenceModal.html',
                     controller: 'ModalInstanceCtrl',
                     size: size,
-                    scope: $rootScope,
-                    resolve: {
-                        items: function () {
-                            return vm.items;
-                        }
-                    }
+                    scope: $rootScope
                 });
                 //get results from confluence modal
                 modalInstance.result.then(function (result) {
@@ -916,13 +907,9 @@
         return returnKey;
     }
     //Confluence Modal controller
-    angular.module('portal').controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items) {
+    angular.module('portal').controller('ModalInstanceCtrl', function ($scope, $uibModalInstance) {
         $scope.spaceType = 'new';
         $scope.selectSpace = $scope.allSpaces[0]['key'];
-        $scope.items = items;
-        $scope.selected = {
-            item: $scope.items[0]
-        };
         $scope.ok = function () {
             var result = [$scope.spaceType, $scope.selectSpace];
             $uibModalInstance.close(result);
