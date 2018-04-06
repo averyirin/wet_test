@@ -561,7 +561,9 @@
 
         //return if the space exisits in confluence
         function getSpaceInConfluence(vm){
+            console.log("Is this space in confluence?");
             project.getSpace(vm.project.id).then(function (result) {
+                console.log(result);
                vm.inConfluence = result.data;
                if(vm.inConfluence){
                    vm.confluenceUrl = result.url;
@@ -574,9 +576,12 @@
         vm.getSpaces = function (size) {
             //display loading overlay
             $rootScope.isLoading = true;
+            console.log("Getting spaces without Project");
             project.getSpaces().then(function (success) {
                 var allSpacesArr = [];
                 var keyArr = [];
+                console.log("Success");
+                console.log(success);
                 for (var index in success.results) {
                     var space = new Object();
                     space.key = success.results[index]['key'];
@@ -623,6 +628,8 @@
                     $rootScope.isModalOpen = false;
                 });
             }, function (error) {
+                console.log("Error");
+                console.log(error);
                 $rootScope.isLoading = false;
                 $rootScope.errorMessage = true;
                 $rootScope.message =  error.data.data;
